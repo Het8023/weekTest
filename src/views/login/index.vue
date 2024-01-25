@@ -13,7 +13,7 @@
           <el-input v-model="ruleForm.mobile"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="ruleForm.password"></el-input>
+          <el-input type="password" v-model="ruleForm.password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -40,9 +40,9 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+      this.$refs[formName].validate(async valid => {
         if (valid) {
-          this.$store.dispatch("user/login", this.ruleForm);
+          await this.$store.dispatch("user/login", this.ruleForm);
           this.$router.push("/");
         } else {
           console.log("error submit!!");
