@@ -14,6 +14,10 @@ const service = axios.create({
 service.interceptors.request.use(
   function (config) {
     // 在发送请求之前做些什么
+    if (store.getters.token) {
+      config.headers.Authorization = "Bearer " + store.getters.token;
+      // console.log(store.getters.token);
+    }
     return config;
   },
   function (error) {

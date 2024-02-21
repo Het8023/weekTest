@@ -19,6 +19,7 @@ router.beforeEach(async (to, from, next) => {
 
   // determine whether the user has logged in
   const hasToken = getToken();
+  // console.log(hasToken);
   if (store.getters.token) {
     if (to.path === "/login") {
       next({ path: "/" });
@@ -27,12 +28,9 @@ router.beforeEach(async (to, from, next) => {
       next();
     }
   } else {
-    /* has no token*/
-
     if (to.path === "/login") {
       next();
     } else {
-      // other pages that do not have permission to access are redirected to the login page.
       next(`/login`);
       NProgress.done();
     }

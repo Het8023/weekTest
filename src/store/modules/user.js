@@ -13,8 +13,13 @@ const getDefaultState = () => {
 const state = getDefaultState();
 
 const mutations = {
-  setToken: (state, token) => {
+  settoken: (state, token) => {
     state.token = token;
+    setToken(token);
+  },
+  removetoken: (state) => {
+    state.token = "";
+    removeToken();
   },
 };
 
@@ -24,24 +29,25 @@ const actions = {
     const res = await loginApi(userInfo);
     console.log(res);
     if (res.data.success) {
-      commit("setToken", res.data.data);
+      commit("settoken", res.data.data);
     }
   },
 
   // user logout
   logout({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      logout(state.token)
-        .then(() => {
-          removeToken(); // must remove  token  first
-          resetRouter();
-          commit("RESET_STATE");
-          resolve();
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    // return new Promise((resolve, reject) => {
+    //   logout(state.token)
+    //     .then(() => {
+    //       removeToken(); // must remove  token  first
+    //       resetRouter();
+    //       commit("RESET_STATE");
+    //       resolve();
+    //     })
+    //     .catch((error) => {
+    //       reject(error);
+    //     });
+    // });
+    commit("removetoken");
   },
 
   // remove token

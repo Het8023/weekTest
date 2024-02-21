@@ -16,3 +16,12 @@ export function loginApi(data) {
     data,
   });
 }
+
+// 修改密码
+export function updatePassApi(data) {
+  return request({
+    url: "/sys/user/updatePass",
+    method: "PUT",
+    data,
+  });
+}
